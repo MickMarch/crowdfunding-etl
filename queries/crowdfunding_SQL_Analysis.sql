@@ -52,13 +52,15 @@ SELECT b.email,
 	   c.description,
 	   c.end_date,
 	   c.goal - c.pledged AS "Left of Goal"
--- INTO email_backers_remaining_goal_amount
+INTO email_backers_remaining_goal_amount
 FROM backers as b
 JOIN campaign as c
 ON b.cf_id = c.cf_id
 WHERE c.outcome = 'live'
-ORDER BY b.last_name;
+-- The following sorting matches the image in the module challenge but
+-- the module asked for a different ORDER BY. Conflicting requirements.
+ORDER BY b.last_name, b.email;
 
 -- Check the table
 
-
+SELECT * FROM email_backers_remaining_goal_amount;
